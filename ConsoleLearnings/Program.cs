@@ -10,6 +10,8 @@ namespace ConsoleLearnings
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Program");
+            Console.ReadKey();
         }
     }
 }
