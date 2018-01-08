@@ -1,0 +1,9 @@
+An abstract class cant be static or sealed.
+cant create an instance to abstract class or interface
+base class must come before interface
+if a method needs to be abstract class needs to be abstract
+override ->virtual, abstract,overrde mandatory.
+abstract,virtual is not valid in interface.
+virtual is not valid in abstract class.
+cant create instance members in static class, method/variables.
+static classes must derive from object, but not from other classes.

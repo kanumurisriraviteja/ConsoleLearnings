@@ -1,0 +1,29 @@
+1.What is the difference between ref & out parameters?
+
+An argument passed as ref must be initialized before passing to the method whereas out parameter needs not to be initialized before passing to a method.
+
+2.What is the difference between “constant” and “readonly” variables in C#?
+
+“Const” keyword is used for making an entity constant. We cannot modify the value later in the code. Value assigning is mandatory to constant variables.
+“readonly” variable value can be changed during runtime and value to readonly variables can be assigned in the constructor or at the time of declaration.
+
+3.What is the difference between “dispose” and “finalize” variables in C#?
+
+Dispose - This method uses interface – “IDisposable” interface and it will free up both managed and unmanaged codes like – database connection, files etc.
+Finalize - This method is called internally unlike Dispose method which is called explicitly. It is called by garbage collector and can’t be called from the code.
+
+4. What is the difference between “throw ex” and “throw” methods in C#?
+“throw ex” will replace the stack trace of the exception with stack trace info of re throw point.
+“throw” will preserve the original stack trace info.
+5.System namespace : mscorlib.dll
+6.What is the difference between “out” and “ref” parameters in C#?
+
+“out” parameter can be passed to a method and it need not be initialized where as “ref” parameter has to be initialized before it is used.
+7.What is the difference between methods – “System.Array.Clone()” and “System.Array.CopyTo()” in C#?
+
+“CopyTo()” method can be used to copy the elements of one array to other. 
+“Clone()” method is used to create a new array to contain all the elements which are in the original array.
+8. What is the difference between “as” and “is” operators in C#?
+
+“as” operator is used for casting object to type or class.
+“is” operator is used for checking the object with type and this will return a Boolean value.
