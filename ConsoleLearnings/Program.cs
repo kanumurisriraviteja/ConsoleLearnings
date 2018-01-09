@@ -10,6 +10,7 @@ namespace ConsoleLearnings
     {
         static void Main(string[] args)
         {
+            LCollections.MainCollections();
             Console.WriteLine("Program");
             Console.ReadKey();
         }
