@@ -9,7 +9,7 @@ namespace ConsoleLearnings
     class L1
     {
         static List<int> newlist = new List<int>();
-        static void main1(string[] args)
+        public static void DelLearnings()
         {
 
             int[] numbers = { 5, 4, 5, 5, 4, 1, 5, 5, 5, 5, 5, 5, 5, 5 };

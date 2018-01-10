@@ -27,3 +27,182 @@ Finalize - This method is called internally unlike Dispose method which is calle
 
 “as” operator is used for casting object to type or class.
 “is” operator is used for checking the object with type and this will return a Boolean value.
+
+9.using System;
+public class Program
+    {
+        public static  void Main()
+        {
+            classA a = new classC();
+            Console.WriteLine(a.Print());
+        }
+ 
+        public class classA
+        {
+            public virtual string Print()
+            {
+                return "classA";
+            }
+        }
+ 
+        public class classB : classA
+        {
+            public override string Print()
+            {
+                return "classB";
+            }
+        }
+ 
+        public class classC : classB
+        {
+            public new string Print()
+            {
+                return "ClassC";
+            }
+        }
+    }
+	
+	
+	10.this parameter declaration will be on static methods only.
+	using System;
+class Program
+    {
+        public static int i = 0;
+        public static void Main()
+        {
+            (i++).Assign();
+        }
+    }
+ 
+    static class Extensions
+    {
+        public static void Assign(this int i)
+        {
+            Console.WriteLine(Program.i);
+            Console.WriteLine(i);
+        }
+    }
+	
+	
+	
+	
+	11.// Out key word cant be used to change the change the modification value.
+	public static void Main(string[] args)
+        {
+            int i = 3;
+            int j = 2;
+
+            func1(ref i);
+            func2(out j);
+            Console.WriteLine(i + " " + j);
+        }
+
+        static void func1(ref int num)
+        {
+            num = num + num;
+        }
+        static void func2(out int num)
+        {
+            //num = num * num; This is Error.
+			num =5;
+        }
+		
+		
+		12.using System;
+public class Program
+    {
+        public static void Main(string[] args)
+        {
+            try
+            {
+                Console.WriteLine("TechBeamers Welcomes Its Readers");
+                Environment.Exit(0);
+            }
+            finally
+            {
+                Console.WriteLine("To the World of C# !!");
+            }
+        }
+     }
+	 o/p:-TechBeamers Welcomes Its Readers
+	 
+	 13.using System;
+public class Program
+    {
+        static void Main(string[] args)
+        {
+            Derived d = new Derived();
+            int i = 10;
+            d.Func(i);
+            Console.ReadKey();
+        }
+    }
+    public class Base
+    {
+        public virtual void Func(int x)
+        {
+            Console.WriteLine("Base.Func(int)");
+        }
+    }
+    public class Derived : Base
+    {
+        public override void Func(int x)
+        {
+            Console.WriteLine("Derived.Func(int)");
+        }
+        public void Func(object o)
+        {
+            Console.WriteLine("Derived.Func(object)");
+        }
+    }
+	
+	//o.p:-Derived.Func(object)
+	
+	
+	
+	14.using System;
+class Program
+    {
+        public static void Main()
+        {
+            Sample s = new Sample();
+            s.Print();
+ 
+            ISample i = s;
+            i.Print();
+        }
+ 
+        public interface ISample
+        {
+            void Print(string val = "Interface Executed");
+        }
+ 
+        public class Sample : ISample
+        {
+            public void Print(string val = "Class Executed")
+            {
+                Console.WriteLine(val);
+            }
+        }
+    }
+	
+	o/p:- Class Executed
+     Interface Executed
+	 
+	 
+	15.  static void Main(string[] args)
+    {
+        float num = 56, div = 0;
+
+        try
+        {
+            float a = num / div;
+            Console.WriteLine(a);
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Division By Zero");
+        }
+        Console.ReadKey();
+    }
+	o/p:-infinity

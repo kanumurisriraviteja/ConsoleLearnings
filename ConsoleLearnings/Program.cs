@@ -11,6 +11,8 @@ namespace ConsoleLearnings
         static void Main(string[] args)
         {
             LCollections.MainCollections();
+            //L1.DelLearnings();
+            //Fileoperations.operationsFile();
             Console.WriteLine("Program");
             Console.ReadKey();
         }

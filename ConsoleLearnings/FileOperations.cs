@@ -9,7 +9,7 @@ namespace ConsoleLearnings
 {
     class Fileoperations
     {
-        public static void operations()
+        public static void operationsFile()
         {
             Console.WriteLine("Hi Teja");
 
