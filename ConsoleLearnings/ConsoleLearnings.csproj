@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CPrograms.cs" />
     <Compile Include="FileOperations.cs" />
     <Compile Include="L1.cs" />
     <Compile Include="LCollections.cs" />

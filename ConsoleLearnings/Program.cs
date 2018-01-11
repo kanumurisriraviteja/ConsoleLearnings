@@ -10,9 +10,10 @@ namespace ConsoleLearnings
     {
         static void Main(string[] args)
         {
-            LCollections.MainCollections();
+            //LCollections.MainCollections();
             //L1.DelLearnings();
             //Fileoperations.operationsFile();
+            //CPrograms.Programs();
             Console.WriteLine("Program");
             Console.ReadKey();
         }

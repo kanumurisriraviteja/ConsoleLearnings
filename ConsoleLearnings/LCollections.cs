@@ -94,13 +94,13 @@ namespace ConsoleLearnings
             }
             Console.WriteLine("HashSet-ex2");
             HashSet<Employee> emphashset = new HashSet<Employee>();
-            emphashset.Add(new Employee { id = 1, Fname = "teja" });
-            emphashset.Add(new Employee { id = 2, Fname = "teja" });
-            emphashset.Add(new Employee { id = 1, Fname = "teja", Lname = "l" });
-            Employee e1 = new Employee() { id = 4, Fname = "teja" };
-            Employee e2 = new Employee() { id = 2, Fname = "teja" };
+            emphashset.Add(new Employee { Id = 1, FName = "teja" });
+            emphashset.Add(new Employee { Id = 2, FName = "teja" });
+            emphashset.Add(new Employee { Id = 1, FName = "teja", LName = "l" });
+            Employee e1 = new Employee() { Id = 4, FName = "teja" };
+            Employee e2 = new Employee() { Id = 2, FName = "teja" };
 
-            if (emphashset.Count(x => x.id == e1.id && x.Fname == e1.Fname && x.Lname == e1.Lname) > 0)
+            if (emphashset.Count(x => x.Id == e1.Id && x.FName == e1.FName && x.LName == e1.LName) > 0)
             {
                 Console.WriteLine("duplicates exist");
             }
@@ -108,7 +108,7 @@ namespace ConsoleLearnings
 
             foreach (var item in emphashset)
             {
-                Console.WriteLine(item.id);
+                Console.WriteLine(item.Id);
             }
             //HashTable
             //key-value based,Non-Generic
@@ -167,30 +167,62 @@ namespace ConsoleLearnings
             Console.WriteLine(queue.Dequeue());
             Console.WriteLine(queue.Dequeue());
 
+            List<Employee> e = new List<Employee>();
+            e.Add(new Employee() { Id = 1, FName = "a", LName = "b" });
+            e.Add(new Employee() { Id = 2, FName = "a", LName = "b" });
+            e.Add(new Employee() { Id = 3, FName = "a", LName = "b" });
+
+            Employee e3 = new Employee() { Id = 1, FName = "a", LName = "b" };
+            Employee e4 = new Employee() { Id = 1, FName = "a", LName = "b" };
+
+            if (e.Contains(e1))
+            {
+                Console.WriteLine("Yes");
+            }
+            if (e1 == e2)
+            {
+                Console.WriteLine("==");
+            }
+            if (e1.Equals(e2))
+            {
+                Console.WriteLine("equals");
+            }
+
+            Console.WriteLine(e1.GetHashCode());
+            Console.WriteLine(e1.GetType());
+            Console.WriteLine(e2.GetHashCode());
+            Console.WriteLine(e2.GetType());
             Console.ReadKey();
         }
-        //public class Employee : IEquatable<Employee>
-        //{
-        //    public int id { get; set; }
-        //    public string Fname { get; set; }
-        //    public string Lname { get; set; }
-
-        //    public override int GetHashCode()
-        //    {
-        //        return id.GetHashCode();
-        //    }
-
-        //    public bool Equals(Employee other)
-        //    {
-        //        return this.id.Equals(other.id) && this.Fname.Equals(other.Fname) && this.Lname.Equals(other.Lname);
-        //    }
+      
         //}
-        public class Employee
+        class Employee : IEquatable<Employee>, IComparable<Employee>
         {
-            public int id { get; set; }
-            public string Fname { get; set; }
-            public string Lname { get; set; }
+            public int Id { get; set; }
+            public string FName { get; set; }
+            public string LName { get; set; }
 
+
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode() ^ this.FName.GetHashCode() ^ this.LName.GetHashCode();
+            }
+
+            public bool Equals(Employee other)
+            {
+                return this.Id == other.Id && this.FName == other.FName && this.LName == other.LName;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return base.Equals(obj);
+            }
+
+            //IComparable Interface
+            public int CompareTo(Employee other)
+            {
+                return this.Id.CompareTo(other.Id);
+            }
         }
     }
 }

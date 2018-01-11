@@ -28,39 +28,74 @@ Finalize - This method is called internally unlike Dispose method which is calle
 “as” operator is used for casting object to type or class.
 “is” operator is used for checking the object with type and this will return a Boolean value.
 
-9.using System;
-public class Program
+9.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Generics
+{
+    class A
     {
-        public static  void Main()
+        public virtual void show()
         {
-            classA a = new classC();
-            Console.WriteLine(a.Print());
-        }
- 
-        public class classA
-        {
-            public virtual string Print()
-            {
-                return "classA";
-            }
-        }
- 
-        public class classB : classA
-        {
-            public override string Print()
-            {
-                return "classB";
-            }
-        }
- 
-        public class classC : classB
-        {
-            public new string Print()
-            {
-                return "ClassC";
-            }
+            Console.WriteLine("A");
+            Console.ReadLine();
         }
     }
+
+    class B : A
+    {
+        public override void show()
+        {
+            Console.WriteLine("B");
+            Console.ReadLine();
+        }
+    }
+
+    class C : B
+    {
+        public new void show()
+        {
+            Console.WriteLine("C");
+            Console.ReadLine();
+        }
+    }
+    class D : A
+    {
+        public new void show()
+        {
+            Console.WriteLine("D");
+            Console.ReadLine();
+        }
+    }
+
+    class DemoOverride
+    {
+        public static void Main()
+        {
+            A a1 = new A();
+            a1.show();//A
+            B b1 = new B();
+            b1.show();//B
+            C c1 = new C();
+            c1.show();//C
+            D d1 = new D();
+            d1.show();//D
+            A a2 = new B();
+            a2.show();//B
+            A a3 = new C();
+            a3.show();//B
+            B b3 = new C();
+            b3.show();//B
+            A a4 = new D();
+            a4.show();//A
+
+        }
+    }
+}
+
 	
 	
 	10.this parameter declaration will be on static methods only.
