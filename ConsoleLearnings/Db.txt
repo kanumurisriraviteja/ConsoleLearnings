@@ -1,0 +1,97 @@
+﻿*To find nth highest salary using Sub-Query
+SELECT TOP 1 SALARY
+FROM (
+      SELECT DISTINCT TOP N SALARY
+      FROM EMPLOYEES
+      ORDER BY SALARY DESC
+      ) RESULT
+ORDER BY SALARY
+
+To find nth highest salary using CTE
+WITH RESULT AS
+(
+    SELECT SALARY,
+           DENSE_RANK() OVER (ORDER BY SALARY DESC) AS DENSERANK
+    FROM EMPLOYEES
+)
+SELECT TOP 1 SALARY
+FROM RESULT
+WHERE DENSERANK = N
+-----------------------------------------------
+*Employee Hierarchy
+Declare @ID int ;
+Set @ID = 7;
+
+WITH EmployeeCTE AS
+(
+     Select EmployeeId, EmployeeName, ManagerID
+     From Employees
+     Where EmployeeId = @ID
+    
+     UNION ALL
+    
+     Select Employees.EmployeeId , Employees.EmployeeName,
+             Employees.ManagerID
+     From Employees
+     JOIN EmployeeCTE
+     ON Employees.EmployeeId = EmployeeCTE.ManagerID
+)
+
+Select E1.EmployeeName, ISNULL(E2.EmployeeName, 'No Boss') as ManagerName
+From EmployeeCTE E1
+LEFT Join EmployeeCTE E2
+ON E1.ManagerID = E2.EmployeeId
+-------------------------------------------------------
+ *Delete duplicate rows in sql
+ WITH EmployeesCTE AS
+(
+   SELECT *, ROW_NUMBER()OVER(PARTITION BY ID ORDER BY ID) AS RowNumber
+   FROM Employees
+)
+DELETE FROM EmployeesCTE WHERE RowNumber > 1
+--------------------------------------------------------
+*SQL query to find employees hired in last n months
+Select *
+FROM Employees
+Where DATEDIFF(MONTH, HireDate, GETDATE()) Between 1 and N
+----------------------------------------------------------
+* Transform rows into columns in sql server
+Select Country, City1, City2, City3
+From
+(
+  Select Country, City,
+    'City'+
+      cast(row_number() over(partition by Country order by Country)
+             as varchar(10)) ColumnSequence
+  from Countries
+) Temp
+pivot
+(
+  max(City)
+  for ColumnSequence in (City1, City2, City3)
+) Piv
+---------------------------------------------------------------
+*SQL query to find rows that contain only numerical dat
+Select Value from TestTable Where ISNUMERIC(Value) = 1
+-----------------------------------------------------------------
+*SQL Query to find department with highest number of employees
+SELECT TOP 1 DepartmentName
+FROM Employees
+JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID
+GROUP BY DepartmentName
+ORDER BY COUNT(*) DESC
+----------------------------------------------------------------------
+*joining 3 tables.
+SELECT DepartmentName, Gender, COUNT(*) as TotalEmployees
+FROM Employees
+JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
+JOIN Genders ON Employees.GenderID = Genders.GenderID
+GROUP BY DepartmentName, Gender
+ORDER BY DepartmentName, Gender
+------------------------------------------
+*without like
+SELECT * FROM Students WHERE CHARINDEX('M',Name) = 1
+SELECT * FROM Students WHERE LEFT(Name, 1) = 'M'
+SELECT * FROM Students WHERE SUBSTRING(Name, 1, 1) = 'M'
+cte : common table expression.
