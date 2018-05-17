@@ -52,12 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Docs\Angular 2.0 Environment Setup.docx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Db.txt" />
     <Content Include="InterviewPoints.txt" />
     <Content Include="InterviewQns.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
