@@ -43,10 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CPrograms.cs" />
+    <Compile Include="Algorithms.cs" />
     <Compile Include="FileOperations.cs" />
+    <Compile Include="InterviewQns.cs" />
     <Compile Include="L1.cs" />
-    <Compile Include="LCollections.cs" />
+    <Compile Include="Collections.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringOperations.cs" />
@@ -56,9 +57,10 @@
     <None Include="Docs\Angular 2.0 Environment Setup.docx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Db.txt" />
-    <Content Include="InterviewPoints.txt" />
-    <Content Include="InterviewQns.txt" />
+    <Content Include="TextFiles\TODO.txt" />
+    <Content Include="TextFiles\Db.txt" />
+    <Content Include="TextFiles\InterviewPoints.txt" />
+    <Content Include="TextFiles\InterviewQns.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,14 +15,20 @@ Finalize - This method is called internally unlike Dispose method which is calle
 4. What is the difference between “throw ex” and “throw” methods in C#?
 “throw ex” will replace the stack trace of the exception with stack trace info of re throw point.
 “throw” will preserve the original stack trace info.
-5.System namespace : mscorlib.dll
-6.What is the difference between “out” and “ref” parameters in C#?
 
-“out” parameter can be passed to a method and it need not be initialized where as “ref” parameter has to be initialized before it is used.
+5.System namespace : mscorlib.dll
+
+6.What is the difference between "Func","Action","Predicate" in C#?
+
+Func => It takes one or more input parameters and returns something.
+Action => It takes one or more input parameters and returns nothing.
+Predicate => It takes one or more input parameters and returns bool value.
+
 7.What is the difference between methods – “System.Array.Clone()” and “System.Array.CopyTo()” in C#?
 
 “CopyTo()” method can be used to copy the elements of one array to other. 
 “Clone()” method is used to create a new array to contain all the elements which are in the original array.
+
 8. What is the difference between “as” and “is” operators in C#?
 
 “as” operator is used for casting object to type or class.

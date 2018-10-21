@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleLearnings
 {
-    class CPrograms
+    class Algorithms
     {
         public static void Programs()
         {
@@ -416,70 +417,62 @@ namespace ConsoleLearnings
                 }
             } while (!string.Equals(s.ToString(), "No", StringComparison.OrdinalIgnoreCase));
         }
-        public static void StringMutable()
-        {
-            //string is mutable
-            string test = "ddd";
-            Console.WriteLine(test.GetHashCode());
-            Console.WriteLine(test.Remove(0, 1).GetHashCode());
 
-            //string builder is immutable
-            StringBuilder a = new StringBuilder();
-            a.Append("t");
-            Console.WriteLine(a.GetHashCode());
-            a.Append("tas");
-            Console.WriteLine(a.Remove(0, 1).GetHashCode());
+        public static void Permutations()
+        {
+            var counter = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < counter; i++)
+            {
+                var s = Console.ReadLine();
+                stringPermutations(s);
+            }
+        }
+        private static void stringPermutations(string inputString)
+        {
+            char[] characters = inputString.ToCharArray().OrderBy(c => c).ToArray();
+            var q = new Queue<char>();
+            characters.ToList().ForEach(c => q.Enqueue(c));
+            var wordAccumulator = new List<char>();
+            var resultAccumulator = new List<string>();
+            recursionStep(wordAccumulator, q, inputString.Length, resultAccumulator);
+            resultAccumulator.Sort();
+            var strBld = new StringBuilder();
+            Console.WriteLine(string.Join(" ", resultAccumulator));
+
+        }
+        private static void recursionStep(List<char> currentVector, Queue<char> queue, int target, List<string> resultAccumulator)
+        {
+            if (currentVector.Count == target)
+            {
+                var strBld = new StringBuilder();
+                currentVector.ForEach(c => strBld.Append(c));
+                Trace.WriteLine(strBld);
+                resultAccumulator.Add(strBld.ToString());
+            }
+
+            for (int i = 0; i < queue.Count; i++)
+            {
+                var temp = queue.Dequeue();
+                currentVector.Add(temp);
+                recursionStep(currentVector, queue, target, resultAccumulator);
+                currentVector.Remove(temp);//remove the last item to continue iterating
+                queue.Enqueue(temp);//enqueue item back as we keep only 1 queue
+            }
+        }
+
+        public static void GenerateSubString(string input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                for (int j = 1; j <= input.Length-i; j++)
+                {
+                    Console.WriteLine(input.Substring(i,j));
+                }
+            }
         }
     }
-
 }
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//public class GFG
-//{
-//    static public void Main()
-//    {
-//        var counter = Convert.ToInt32(Console.ReadLine());
-//        for (int i = 0; i < counter; i++)
-//        {
-//            var s = Console.ReadLine();
-//            stringPermutations(s);
-//        }
-//    }
-//    private static void stringPermutations(string inputString)
-//    {
-//        char[] characters = inputString.ToCharArray().OrderBy(c => c).ToArray();
-//        var q = new Queue<char>();
-//        characters.ToList().ForEach(c => q.Enqueue(c));
-//        var wordAccumulator = new List<char>();
-//        var resultAccumulator = new List<string>();
-//        recursionStep(wordAccumulator, q, inputString.Length, resultAccumulator);
-//        resultAccumulator.Sort();
-//        var strBld = new StringBuilder();
-//        Console.WriteLine(string.Join(" ", resultAccumulator));
 
-//    }
-//    private static void recursionStep(List<char> currentVector, Queue<char> queue, int target, List<string> resultAccumulator)
-//    {
-//        if (currentVector.Count == target)
-//        {
-//            var strBld = new StringBuilder();
-//            currentVector.ForEach(c => strBld.Append(c));
-//            //Trace.WriteLine(strBld);
-//            resultAccumulator.Add(strBld.ToString());
-//        }
-
-//        for (int i = 0; i < queue.Count; i++)
-//        {
-//            var temp = queue.Dequeue();
-//            currentVector.Add(temp);
-//            recursionStep(currentVector, queue, target, resultAccumulator);
-//            currentVector.Remove(temp);//remove the last item to continue iterating
-//            queue.Enqueue(temp);//enqueue item back as we keep only 1 queue
-//        }
-//    }
-//}
 //public static bool Check_sub(String str1, String str3)
 //{
 //    if (str3.Contains(str1))

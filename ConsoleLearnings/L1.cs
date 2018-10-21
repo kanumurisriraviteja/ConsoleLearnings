@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleLearnings
 {
-    class L1
+    public static class L1
     {
         static List<int> newlist = new List<int>();
-        public static void DelLearnings()
+        public static void CollectionsLearnings()
         {
-
             int[] numbers = { 5, 4, 5, 5, 4, 1, 5, 5, 5, 5, 5, 5, 5, 5 };
 
             Console.WriteLine("L1");
@@ -41,37 +40,10 @@ namespace ConsoleLearnings
             int oddNumbers = numbers.Count(x => x / 2 == 1);
             Console.WriteLine(oddNumbers);
 
-
-            Console.WriteLine("L4");
-            MyDelegate md1 = new MyDelegate(TestDelegate);
-            md1("teja");
-            //md1(1); Error
-            m2(TestDelegate, 1);
-
             Console.ReadKey();
         }
-        public delegate string MyDelegate(string s);
 
-        public static string TestDelegate(string s)
-        {
-            return "TestDelegate" + " " + s;
-        }
-        public static string TestDelegate(int i)
-        {
-            return "TestDelegate" + " " + i;
-        }
-        public static void m1(int i1)
-        {
-            Func<int, string> f1 = TestDelegate;
-            string s1 = f1(i1);
-            Console.WriteLine("m1" + " " + s1);
-
-        }
-        public static void m2(Func<int, string> f1, int i1)
-        {
-            Console.WriteLine("m2" + " " + f1(i1));
-        }
-
+        //public void test() { } A static class should always have static variables.
     }
 
 }
