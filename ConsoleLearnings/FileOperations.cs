@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Security.AccessControl;
+
+
 namespace ConsoleLearnings
 {
     class Fileoperations
     {
-        public static void operationsFile()
+        private static String inputFileName = Environment.CurrentDirectory.Replace("bin\\Debug", "Input");
+        private static String outputFieName = Environment.CurrentDirectory.Replace("bin\\Debug", "Output");
+
+        public static void WriteToFiles()
         {
-            Console.WriteLine("Hi Teja");
-
-
-
-            //1
-            /*
+            //1           
             string filename = @"D:\desktop\teja";
             FileStream fs1 = new FileStream(filename, FileMode.OpenOrCreate);
             StreamWriter sw = new StreamWriter(fs1);
@@ -24,10 +20,10 @@ namespace ConsoleLearnings
             string str = Console.ReadLine();
             sw.WriteLine(str);
             sw.Flush();
-            sw.Close();*/
+            sw.Close();
 
-            //DirectoryInfo inf=  Directory.CreateDirectory(filename);
-            //Console.WriteLine(inf.FullName);
+            DirectoryInfo inf = Directory.CreateDirectory(filename);
+            Console.WriteLine(inf.FullName);
             StringBuilder sb1 = new StringBuilder();
             sb1.Append("tdddfdfeja");
             Console.WriteLine(sb1);
@@ -58,34 +54,86 @@ namespace ConsoleLearnings
                 a2.Close();
             }
 
-            //string tempFolderAbsolutePath = @"D:\desktop\Temp1";
-            //string subFolderRelativePath = @"SubTemp2";
-            //string subFolderRelativePath1 = @"SubsubTemp3";
+            string tempFolderAbsolutePath = @"D:\desktop\Temp1";
+            string subFolderRelativePath = @"SubTemp2";
+            string subFolderRelativePath1 = @"SubsubTemp3";
 
-            //DirectoryInfo tempFolder = new DirectoryInfo(tempFolderAbsolutePath);
-            //DirectoryInfo a = tempFolder.CreateSubdirectory(subFolderRelativePath);
-            //DirectoryInfo b = a.CreateSubdirectory(subFolderRelativePath1);
+            DirectoryInfo tempFolder = new DirectoryInfo(tempFolderAbsolutePath);
+            DirectoryInfo subFolder = tempFolder.CreateSubdirectory(subFolderRelativePath);
+            DirectoryInfo b = subFolder.CreateSubdirectory(subFolderRelativePath1);
 
-            //FileInfo[] aa = new DirectoryInfo(tempFolderAbsolutePath).GetFiles();
-            //foreach (var c1 in aa) {
+            FileInfo[] aa = new DirectoryInfo(tempFolderAbsolutePath).GetFiles();
+            foreach (var c1 in aa)
+            {
 
-            //    Console.WriteLine(c1);
-            //}
+                Console.WriteLine(c1);
+            }
 
 
-            //string tempFileName = String.Concat(Guid.NewGuid().ToString(), @".tmp");
-            //string textData = @"Temp text data";
+            string tempFileName = String.Concat(Guid.NewGuid().ToString(), @".tmp");
+            string textData = @"Temp text data";
 
-            //using (StreamWriter streamWriter = File.CreateText(Path.Combine(subFolder.FullName, tempFileName)))
-            //{
-            //    streamWriter.Write(textData);
-            //    streamWriter.Flush();
-            //    streamWriter.Close();
-            //}
-            //if (File.Exists(filename)) { Console.WriteLine("File "); }
-            //fs1.Close();
+            using (StreamWriter streamWriter = File.CreateText(Path.Combine(subFolder.FullName, tempFileName)))
+            {
+                streamWriter.Write(textData);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            if (File.Exists(filename)) { Console.WriteLine("File "); }
+            fs1.Close();
 
-            Console.ReadLine();
+
+            //Process Each file in the Directory.
+            DirectoryInfo dirInfo = new DirectoryInfo(inputFileName);
+            FileInfo[] fileInfo = dirInfo.GetFiles();
+            foreach (var file in fileInfo)
+            {
+            }
+        }
+        public static void DeleteDirectory()
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(outputFieName);
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\t Output Directory doesn't exit to be deleted.....");
+            }
+
+        }
+        private string ReadFile(string input)
+        {
+            StringBuilder fileContent = new StringBuilder();
+            try
+            {
+                using (StreamReader sr = new StreamReader(input))
+                {
+                    string line;
+                    // Read and display lines from the file until the end of
+                    // the file is reached.
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        fileContent.Append(line);
+                        fileContent.Append(Environment.NewLine);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Let the user know what went wrong.
+                Console.WriteLine("The file " + input + "  could not be read.");
+            }
+            return fileContent.ToString();
         }
     }
 }
