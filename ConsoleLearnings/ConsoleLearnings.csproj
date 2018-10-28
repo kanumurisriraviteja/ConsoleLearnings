@@ -55,6 +55,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Docs\Angular 2.0 Environment Setup.docx" />
+    <None Include="Docs\Joins.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TextFiles\TODO.txt" />
