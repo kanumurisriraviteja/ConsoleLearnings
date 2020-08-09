@@ -1,0 +1,93 @@
+﻿public static class WebApiConfig
+{
+   public static void Register(HttpConfiguration config)
+    {
+        //Attribute routing
+        config.MapHttpAttributeRoutes();
+        [Route("api/student/names")] in the method named in the controller.
+
+
+        // default route
+        config.Routes.MapHttpRoute(
+            name: "DefaultApi",
+            routeTemplate: "api/{controller}/{action}/{id}",
+            defaults: new { id = RouteParameter.Optional }
+        );
+    }
+}
+
+//Global.asax
+public class WebAPIApplication : System.Web.HttpApplication
+{
+    protected void Application_Start()
+    {
+        GlobalConfiguration.Configure(WebApiConfig.Register);
+        
+        //other configuration
+    }
+}
+---------------------------------------------------------------------------------------------------------------------
+FromUri] attribute to force Web API to get the value of complex type from the query string
+[FromBody] attribute to get the value of primitive type from the request body, opposite to the default rules.
+
+---------------------------------------------------------------------------------------------------------------------
+//Sample Method in webapi controller.
+[HttpPost]
+        [ActionName("cmdUpdateClick")]
+        public HttpResponseMessage(IHttpActionResult) cmdUpdateClick([FromBody]SchedManage schedManage)
+        {
+              var response = schedManageBusiness.cmdUpdateClick(schedManage);             
+              return Request.CreateResponse(HttpStatusCode.OK, response);
+
+              // For IHttpActionResult
+              return Ok(response); NotFound();
+         }
+
+---------------------------------------------------------------------------------------------------------------------
+IHttpActionResult -> can retrurn a custom message by creating a new class deriving from IHttpActionResult and overriding ExecuteAsync
+
+***Filters:
+> Authentication filters -> IAuthenticationFilter -> OnAuthentication(AuthenticationContext filterContext), OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+> Authorization filters  -> IAuthorizationFilter  -> OnAuthorization(AuthorizationContext filterContext)    
+> Action filters         -> IActionFilter         -> OnActionExecuting(ActionExecutingContext filterContext),OnActionExecuted(ActionExecutedContext filterContext) 
+> Response filters       -> IResultFilter         -> OnResultExecuting(ResultExecutingContext filterContext),OnResultExecuted(ResultExecutedContext filterContext)
+> Exception filters      -> IExceptionFilter      -> OnException(ExceptionContext filterContext)
+
+
+class :
+
+> AuthorizeAttribute
+> ActionFilterAttribute inherits both IActionFilter,IResultFilter
+  examples : [OutputCache(Duration = 3600, VaryByParam = "none")],[HandleError],[Authorize] 
+
+
+
+
+  HttpClient :
+
+  // POST request sending the data.
+  HttpClient httpClient = new HttpClient();
+  httpClient.DefaultRequestHeaders.Accept.Clear();
+  httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+  httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+  httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("RestAuth", restValidation);
+  
+  T InputToService = Input;
+  string URL = GetRESTUrl() + APIAction;
+  HttpResponseMessage response = httpClient.PostAsJsonAsync<T>(URL, InputToService).Result;
+  if (response.IsSuccessStatusCode)
+  {
+      var ReturnValue = response.Content.ReadAsStringAsync().Result;
+      System.Web.Script.Serialization.JavaScriptSerializer json_serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+      var ReturnedEmployees = json_serializer.Deserialize<List<T>>(ReturnValue);
+      return ReturnedEmployees;
+  }
+  
+  if (response.StatusCode == HttpStatusCode.InternalServerError)
+  {
+      var errCode = response.Content.ReadAsStringAsync().Result;
+      throw new HttpException(errCode, 500);
+  }
+
+  // For Get Request 
+  HttpResponseMessage response = httpClient.GetAsync(URL).Result;

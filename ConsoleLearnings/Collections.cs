@@ -13,6 +13,47 @@ namespace ConsoleLearnings
         public static void MainCollections()
         {
             //Array
+            int[] oneDim = new int[] { 1, 2, 3 };
+            int[] oneDim1 = new int[10];
+            oneDim1[0] = 1;
+            oneDim1[8] = 2;// The uninitialized would be 0
+            //oneDim1[11] = 2;//Array Index Out of Bounds Exception.
+
+            // Multi Dimentional Arrays
+            int[,] numbers = { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+            int[,] numbers1 = new int[3, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+            //int[,] numbersError = new int[3, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 5, 5 } };//Compile Time,Initializer of Length 3 is expected.
+            int[,] numbers2 = new int[3, 2];
+            numbers2[0, 0] = 1;
+            numbers2[0, 1] = 1;
+            // numbers2[0, 2] = 1;// Array Index Out of Bound.
+
+            //Jagged Arrays
+            //int[][] jaggedArray = new int[][] { { 1, 2, 3, 4 }, { 5, 6, 7, 8 } };//C Error try using a new 
+            int[][] jaggedArrary = new int[][] { new int[] { 1 }, new int[] { 2, 3, 4 } };
+            //Console.WriteLine(jaggedArrary.Length);
+            for (int i = 0; i < jaggedArrary.Length; i++)
+            {
+                for (int j = 0; j < jaggedArrary[i].Length; j++)
+                {
+                    Console.WriteLine(jaggedArrary[i][j]);
+                }
+            }
+            int[][] arr = new int[4][];
+            arr[0] = new int[2] { 7, 9 };
+            arr[1] = new int[4] { 12, 42, 26, 38 };
+            arr[2] = new int[6] { 3, 5, 7, 9, 11, 13 };
+            arr[3] = new int[3] { 4, 6, 8 };
+
+            // Jagged and Multi Dimen
+            int[][,] jaggedMultiArray = new int[4][,]
+                {
+                new int[,] { {11,23}, {58,78} },
+                new int[,] { {50,62}, {45,65}, {85,15}},
+                new int[,] { {245,365}, {385,135} },
+                new int[,] { {1,2}, {4,4}, {4,5} }
+                };
+
             //index based,Generic ,Fixed length.
             Console.WriteLine("Array");
             int[] iArray = new int[10];
@@ -313,14 +354,14 @@ namespace ConsoleLearnings
             {
                 Console.WriteLine("equals");
             }
-      
+
             //Equals,GetHashCode,ToString,GetType
             Console.WriteLine(e3.GetType());//ConsoleLearnings.LCollections+Employee
 
             Console.ReadKey();
         }
 
-        class Employee : IComparable<Employee>//, IEquatable<Employee> 
+        class Employee : IComparable<Employee>//, IEquatable<Employee> ,IEqualityComparer<Student>
         {
             public int Id { get; set; }
             public string FName { get; set; }
@@ -348,6 +389,18 @@ namespace ConsoleLearnings
             {
                 return this.Id.CompareTo(other.Id);
             }
+            //IEqualityComparer<Student> Distinct list.Distinct(new StudentComparer()); 
+            /*
+                 public bool Equals(Student x, Student y)
+                 {
+                     throw new NotImplementedException();
+                 }
+
+                 public int GetHashCode(Student obj)
+                 {
+                     throw new NotImplementedException();
+                 }
+             */
         }
     }
 }

@@ -1,0 +1,92 @@
+﻿MVC -> Model,View,Controller
+Global.asax.cs
+protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas(); // register all the areas
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters); // filters
+            RouteConfig.RegisterRoutes(RouteTable.Routes); // register all the  routes
+            BundleConfig.RegisterBundles(BundleTable.Bundles); // bundling
+        }
+
+ViewBag,ViewData -> send data from controller to the view.
+TempData -> send data from one controller to another controller.
+static string applicationInfoStr = "ApplicationInfo";
+HttpContext.Current.Session[applicationInfoStr] = value;
+
+ActionResult is the parent
+ > JsonResult               Json()
+ > ViewResult               View()
+ > RedirectToRouteResult    RedirectToAction()
+ > FileResult               File() 
+ > EmptyResult
+
+
+ View(); ReturnRedirectToAction("Method","Controller"); ReturnRedirectToRoute("route config route name"); Redirect("https://google.com")
+ Html.Partial returns a String. Html.RenderPartial calls Write internally and returns void
+ @Html.Partial("partialViewName",model)   >> return string and can  be assigned to a variable that can be changed                     
+ @{ Html.RenderPartial("ViewName");  }    >> inside braces >> return void and cant be changed
+ @Html.Action("MethodName")               > string 
+ @ {Html.RenderAction("MethodName");}     > void 
+
+ [OutputCache], [NonAction],[ChildActionOnly]
+
+ HttpConfiguration -> configure in the webapi
+ HttpClient        -> send data to the webapi
+ HttpContext       -> session in the mvc
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  @Html.AntiForgeryToken()
+  [ValidateAntiForgeryToken]
+
+  Ajax: 
+   <div id="sessionrefresh">
+        <input type="hidden" id="checkSession" value="\" @SessionPersistor.USERNAME \"">
+        <input type="hidden" id="CSRFToken" value=@TokenHeaderValue()>
+    </div>
+  @functions{
+            public string TokenHeaderValue()
+            {
+                string cookieToken, formToken;
+                AntiForgery.GetTokens(null, out cookieToken, out formToken);
+                return cookieToken + ":" + formToken;
+            }
+        }
+
+ var token = document.getElementById('CSRFToken').value;
+     $.ajax({
+         url: url,
+         type: methodType,
+         headers: {
+             'RequestVerificationToken': token
+         },
+
+         data: JSON.stringify(jsonData),
+         contentType: 'application/json',
+         success: successFn,
+         error: errorFn,
+         cache: false,
+     });
+
+     C# code:
+     ---------------------------------------------------------
+
+     if (request.IsAjaxRequest())
+     {
+         string cookieToken = "";
+         string formTokenValue = "";
+
+         string tokenHeaders = filterContext.HttpContext.Request.Headers["RequestVerificationToken"];
+         if (tokenHeaders != null)
+         {
+             string[] tokens = tokenHeaders.Split(':');
+             if (tokens.Length == 2)
+             {
+                 cookieToken = tokens[0].Trim();
+                 formTokenValue = tokens[1].Trim();
+             }
+         }
+         AntiForgery.Validate(cookieToken, formTokenValue);
+     }
+     else
+     {
+         AntiForgery.Validate();
+     }

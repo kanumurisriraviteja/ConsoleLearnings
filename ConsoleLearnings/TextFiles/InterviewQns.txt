@@ -247,3 +247,9 @@ class Program
         Console.ReadKey();
     }
 	o/p:-infinity
+
+    16. what is the difference between var and dynamic
+    > var is compile time
+      var a = 10; a ="teja"; // error
+    > dynamic is runtime
+      it doesnot give any error for the above declaration.

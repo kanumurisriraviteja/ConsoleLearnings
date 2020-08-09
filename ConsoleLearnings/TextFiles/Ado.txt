@@ -1,0 +1,58 @@
+﻿SQLCommand Class:
+---------------------------
+SqlConnection con = new SqlConnection("data source=.; database=Sample; integrated security=SSPI");
+SqlCommand cmd = new SqlCommand("Select * from tblProduct", con);
+con.Open();
+SqlDataReader rdr = cmd.ExecuteReader();
+GridView1.DataSource = rdr;
+GridView1.DataBind();
+con.Close();
+
+
+ExecuteReader    > returns rows of data
+ExecuteNonQuery  > insert,update,delete and gives the no of rows effected.
+ExecuteScalar    > gives a single count 
+
+SQL injection:
+
+SqlCommand cmd = new SqlCommand("spGetProductsByName", con);
+cmd.CommandType = System.Data.CommandType.StoredProcedure;
+cmd.Parameters.AddWithValue("@ProductName", TextBox1.Text + "%");
+
+
+//Add the output parameter to the command object
+SqlParameter outPutParameter = new SqlParameter();
+outPutParameter.ParameterName = "@EmployeeId";
+outPutParameter.SqlDbType = System.Data.SqlDbType.Int;
+outPutParameter.Direction = System.Data.ParameterDirection.Output;
+cmd.Parameters.Add(outPutParameter);
+
+
+SqlDataReader is a connection oriented where as a SqlDataAdapter and DataSet is a disconnected architecture.
+
+SQLDataAdapter Class:
+---------------------------
+
+string ConnectionString = ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
+using (SqlConnection connection = new SqlConnection(ConnectionString))
+{
+    // Create an instance of SqlDataAdapter. Spcify the command and the connection
+    SqlDataAdapter dataAdapter = new SqlDataAdapter("select * from tblProductInventory", connection);
+    // Create an instance of DataSet, which is an in-memory datastore for storing tables
+    DataSet dataset = new DataSet();
+    // Call the Fill() methods, which automatically opens the connection, executes the command 
+    // and fills the dataset with data, and finally closes the connection.
+    dataAdapter.Fill(dataset);
+
+    GridView1.DataSource = dataset;
+    GridView1.DataBind();
+}
+
+
+
+
+
+
+DbSet.SqlQuery()
+DbContext.Database.SqlQuery()
+DbContext.Database.ExecuteSqlCommand()

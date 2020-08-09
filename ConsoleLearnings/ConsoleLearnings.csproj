@@ -48,6 +48,7 @@
     <Compile Include="InterviewQns.cs" />
     <Compile Include="L1.cs" />
     <Compile Include="Collections.cs" />
+    <Compile Include="LearnLinq.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringOperations.cs" />
@@ -55,13 +56,23 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Docs\Angular 2.0 Environment Setup.docx" />
+    <None Include="Docs\Cracking the Coding Interview, 6th Edition 189 Programming Questions and Solutions.pdf" />
     <None Include="Docs\Joins.xlsx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\ado.png" />
+    <Content Include="Images\designpatterns.PNG" />
+    <Content Include="Images\mvcfilters.PNG" />
+    <Content Include="Images\mvckeeppeek.png" />
+    <Content Include="Images\webapifilters.PNG" />
+    <Content Include="TextFiles\Ado.txt" />
+    <Content Include="TextFiles\DesignPatterns.txt" />
+    <Content Include="TextFiles\MVC.txt" />
     <Content Include="TextFiles\TODO.txt" />
     <Content Include="TextFiles\Db.txt" />
     <Content Include="TextFiles\InterviewPoints.txt" />
     <Content Include="TextFiles\InterviewQns.txt" />
+    <Content Include="TextFiles\WebApi.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
