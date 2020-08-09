@@ -1,0 +1,133 @@
+MVC:
+
+security in mvc
+life cycle mvc
+update model in mvc
+how to declare filters
+how to validate model
+singleton dp
+OAuth
+Mvc filters
+how do you done authentication in mvc ?
+url routing
+attribute  routing
+
+SQL Server:
+sql performance
+Index
+composite Index
+how to call stored procedure from another stored procedure
+how many types function in sql
+when we are set index in sql
+sequence diagram
+Triger insert query handling (we can stop insert or what)
+table storage we can create index ?
+What is CTE ?
+how to create composite index ?
+
+Linq:
+left outer join in linq
+
+entity frma work:
+
+how to edmx updade after prod
+how to change the table name from edmx to code
+
+Webapi:
+webapi - security
+how to update list class in webapi ?
+what are the data type return result mvc and webapi?
+
+
+Jquery:
+
+all the action method name how to get logging
+jquery select all the controls 
+why we are using jquery
+
+
+Angular:
+how to send data from view to controller
+
+how to update portion of partial view
+what is three type of testmethod
+how you will pass input from test method
+
+
+OOPS:
+
+why we cannot create instance to static class
+abstract class constructor 
+cache where it will store
+what is serialize, how serialize object
+difference between arraylist and list?
+how to remove duplicates in list ?
+annotation error message how to show in view ?
+
+
+
+
+
+
+what is diff b/w abstract and interface
+
+extension method with example
+
+mvc pipeline
+
+java script events
+
+utc time formate conversion
+
+why go for api
+
+indexes
+
+sp and function
+
+filters
+
+when gp for function
+
+why should use mvc
+
+what DIP
+
+PROJECT PATTERN
+
+
+FUNCTION OVVERIDING
+
+whst is diff b/w action execting and ecection -filter
+
+
+how to create servicerin angular?
+what is componet call serive
+linq left join
+
+filter,exuctor, instance static class
+
+abstract, constructor,filters,bundle,verification,autorization result exception
+
+
+ MVC life cycle
+  1.Why we go for MVC and mvc lifecyle.
+  2.Diff bw web api and webservice. why we use web api?
+  3.Explain abt proj and roles.
+  4.SOLID Principles.
+  5.Diff between var and dynamic.
+  6.Dependency Injections.
+  7.Explain about role.
+  8.Tell about Rest tier services.
+  9.design patterns -single tone..ete
+
+ 1.Explain about project.
+  2.Explain about Entity-framework?
+  3.In Project wat are things need to be considered?
+  4.Tell important about Object oriented Principle to implements the applications and design patterns.
+  5.If any issue faced in applications what need do?. tell about problem statement solving procedure.
+  6.Tell something about Entity framework.
+  7.Restful working experience?
+  8.They asked some questions from Profile(Resume) like -Explain some advantages about AngularJS.
+
+

@@ -56,10 +56,15 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Docs\Angular 2.0 Environment Setup.docx" />
+    <None Include="Docs\ASP.NET MVC Interview Questions - Answers - By Shailendra Chauhan.pdf" />
+    <None Include="Docs\CareerCup - Cracking the Technical Interview_Top_150_Questions.pdf" />
     <None Include="Docs\Cracking the Coding Interview, 6th Edition 189 Programming Questions and Solutions.pdf" />
     <None Include="Docs\Joins.xlsx" />
+    <None Include="Docs\MVC.pdf" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Docs\QNS.txt" />
+    <Content Include="Docs\Visual_SQL_JOINS_orig.jpg" />
     <Content Include="Images\ado.png" />
     <Content Include="Images\designpatterns.PNG" />
     <Content Include="Images\mvcfilters.PNG" />
