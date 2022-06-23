@@ -10,7 +10,8 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            LearnLinq.LinqOperations();
+            Console.WriteLine("Hello world");
+            //LearnLinq.LinqOperations();
             // Algorithms();
             //Collections.MainCollections();
             //StringOperations.Operations();
