@@ -99,3 +99,108 @@ SELECT * FROM Students WHERE CHARINDEX('M',Name) = 1
 SELECT * FROM Students WHERE LEFT(Name, 1) = 'M'
 SELECT * FROM Students WHERE SUBSTRING(Name, 1, 1) = 'M'
 cte : common table expression.
+
+================================================================================================================================
+
+Employee :
+===============================
+Id	Name	Salary	carId
+1    a		10		1
+2    b		20		3
+3    c		10		5
+4    d		5		1
+5    f		2		NULL
+6    z		50		10
+
+
+Car:
+==============================
+Id	name	color	cost
+1	b		NULL	6
+2	t		red		93
+3	k		white	10
+4	h		NULL	20
+5	b		red		9
+
+
+1.Give the employees who don't have cars and list of cars who have no sales
+2.nth costliest car
+
+
+select row_number() over(order by cost desc) as rnum,id,name,cost from car
+select rank() over(order by cost desc) as ranknum,id,name,cost from car 
+select dense_rank() over(order by cost desc) as ranknum,id,name,cost from car 
+
+select row_number() over(partition by cost order by cost desc) as rnum,id,name,cost from car
+select rank() over(partition by cost order by cost desc) as rnum,id,name,cost from car
+select dense_rank() over(partition by cost order by cost desc) as ranknum,id,name,cost from car 
+
+
+select ranknum1 from (select dense_rank() over(order by cost desc) as ranknum1,id,name,cost from car) b
+where ranknum1 = (
+select max(ranknum)-1  from(
+select dense_rank() over(order by cost desc) as ranknum,id,name,cost from car
+) a)
+
+select * from car 
+
+======================================================================================================================
+
+EmployeeID	EmployeeName	ManagerID
+1				A			5
+2				B			8
+3				C			8
+4				D		    3
+5				E			8
+6				F			2
+7				G			4
+8				H		    NULL
+9				I			2
+10				J			5
+
+
+select  * from Employees e1 LEFT join Employees e2 on e1.managerid = e2.employeeid => 10 records
+select  * from Employees e1 LEFT join Employees e2 on e1.EmployeeId = e2.ManagerId => 14 records
+
+select  * from Employees e1 inner join Employees e2 on e1.managerid = e2.employeeid => 9 records
+select  * from Employees e1 inner join Employees e2 on e1.EmployeeId = e2.ManagerId => 9 records
+
+1. Employee, His Manager => select  e1.EmployeeName as ename, e2.EmployeeName as mname from Employees e1 LEFT join Employees e2 on e1.managerid = e2.employeeid
+2. Not Managers => select  * from Employees e1 LEFT join Employees e2 on  e1.EmployeeId = e2.ManagerId where e2.ManagerID is null 
+3. Managers  => select distinct  e1.EmployeeName from Employees e1 LEFT join Employees e2 on  e1.EmployeeId = e2.ManagerId where e2.ManagerID is not null 
+4. Managers and their below employees count =>  select  e1.EmployeeName,count(*) from Employees e1 LEFT join Employees e2 on e1.employeeid = e2.managerid  group by  e1.EmployeeName
+5. who has the maximum no of managers 
+
+	select * from (
+	select  DENSE_RANK() over(order by employeeCount desc) as drank ,* from (
+	select  e1.EmployeeName as Name,count(*) as employeeCount from Employees e1 LEFT join Employees e2 on e1.employeeid = e2.managerid  group by  e1.EmployeeName) a) b where drank= 1
+	
+6. who doesn't have active managers.
+
+    select  * from Employees e1 inner join Employees e2 on e1.managerid = e2.employeeid
+	
+7. Employee Hierarchy
+	   
+		Declare @ID int;
+		Set @ID = 7;
+
+		WITH EmployeeCTE AS
+		(
+			 -- Anchor
+			 Select EmployeeId, EmployeeName, ManagerID
+			 From Employees
+			 Where EmployeeId = @ID
+			
+			 UNION ALL
+			
+			 -- Recursive Member
+			 Select Employees.EmployeeId , Employees.EmployeeName, Employees.ManagerID
+			 From Employees
+			 JOIN EmployeeCTE
+			 ON Employees.EmployeeId = EmployeeCTE.ManagerID
+		)
+
+		Select E1.EmployeeName, ISNULL(E2.EmployeeName, 'No Boss') as ManagerName
+		From EmployeeCTE E1
+		LEFT Join EmployeeCTE E2
+		ON E1.ManagerID = E2.EmployeeId	

@@ -361,6 +361,14 @@ namespace ConsoleLearnings
             Console.ReadKey();
         }
 
+
+        public static void LearnLinkedList()
+        {
+            //LinkedList<Employee> list = new LinkedList<Employee>();
+            //list.AddFirst(new Employee());
+            //list.AddAfter()
+
+        }
         class Employee : IComparable<Employee>//, IEquatable<Employee> ,IEqualityComparer<Student>
         {
             public int Id { get; set; }
